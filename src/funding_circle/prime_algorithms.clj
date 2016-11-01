@@ -87,7 +87,7 @@
    The advantage of the segmented Sieve Algorithm over tranditional Seive is 
    that it reduces the space complexity. It works by first computing the first 
    primes < sqrt(n) with a typical sieve algorithm. The Sieve algorithm, by the way,
-   works by "crossing off" all multiples of n greater than n for all n from 2 to sqrt(n).
+   works by 'crossing off' all multiples of n greater than n for all n from 2 to sqrt(n).
    Everything not crossed off is then a prime. After initial sieving, segmented sieve 
    adds all those primes in x > sqrt(n) + 1 in sqrt(n) sized chucks which are not 
    divisible by any of the computed primes. Note that for any product, x * y = n,

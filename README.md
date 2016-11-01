@@ -4,8 +4,8 @@ This repository includes several algorithms for generating prime numbers, incudi
 
 ## How to Run
 - Clone this repository
-- at the root, run `lein compile`, `lein uberjar`.
-- then, `java -jar targets/funding_circle-standalone.jar`. You should see a table printed of the cartessian product of the first 10 primes.
+- at the root, run `lein compile`, then `lein uberjar`.
+- then, `java -jar target/funding_circle-standalone.jar`. You should see a table printed of the cartessian product of the first 10 primes.
 
 ## Dependencies
 - clojure.data.priority-map. Leiningen will download this automatically when compiling the project.
