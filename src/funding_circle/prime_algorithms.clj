@@ -22,8 +22,6 @@
                             (recur (inc i))))))
                   (iterate inc 3))))
 
-
-
 (defn eager-trial-division
   "This is the best algorithm I came up with on my own. Turns 
    out it what is called a trial division algorithm. It works by testing 
@@ -38,15 +36,16 @@
                    (conj prev))
               (inc i))))))
 
-
 (def lazy-trial-division
   "The above is actually equivalent to the common trial division algorithm
    that is often mistaken for the Sieve of Eratosthenes algorithm. It is 
    expressed in the paper as the haskell equivalent of the following elegant
-   but slow algorithm."
+   but slow algorithm. Unfortunately the stack blows for large n with this
+   algorithm."
   (letfn [(step [[prime & xs]]
-            (lazy-seq (cons prime (step (filter #(pos? (mod % prime)) xs)))))]
+            (lazy-seq (cons prime (filter #(pos? (rem % prime)) (step xs)))))]
     (step (iterate inc 2))))
+
 
 (def lazy-trial-division-xf
   "An attempt to implement the lazy trial division algorithm above using 
@@ -72,7 +71,6 @@
               (not-any? zero? (map #(mod x %) (candidate-factors x))))]
       (cons 2 (filter prime? (iterate inc 3))))))
 
- 
 (defn segmented-sieve
   "Here is an implementation of the segmented sieve algorithm 
    described at: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes

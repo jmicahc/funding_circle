@@ -1,0 +1,5 @@
+(ns funding_circle.test-performance
+  (:require [funding_circle.prime-algorithms :as algs]))
+
+
+(time (take 1000 algs/brute-force))
