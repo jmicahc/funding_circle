@@ -79,6 +79,7 @@
               (not-any? zero? (map #(mod x %) (candidate-factors x))))]
       (cons 2 (filter prime? (iterate inc 3))))))
 
+
 (defn segmented-sieve
   "Here is an implementation of the segmented sieve algorithm 
    described at: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
@@ -155,7 +156,7 @@
    the sequence in a cell to prevent eager evaluation.
 
    Time complexity is O( nloglogn ). Note that for a typical sieve, n
-   referes to the number of primes less than x, but finding the nth prime is
+   referes to the number of primes less than n, but finding the nth prime is
    asymptotically the same, since log(n*log(n)) = log(n) + log(log(n)); the extra
    logarithms drops out."
   ([[x & xs]]

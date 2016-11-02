@@ -1,6 +1,6 @@
 ## Prime Generation Algorithms (funding circle coding challenge)
 
-This repository includes several algorithms for generating prime numbers, incuding a trival brute force algorithm, several trial division algorithms, and serveral genuine Sieve Of Eratosthenes algorithms. Consistent with the Clojure philosophy of leveraging the rich academic literature--and as someone with a cognitive science background where the ONLY unit of consuption is the paper--many of the algorithms are based on Haskell implementations discussed in Melissa E. O'Neil's great paper on functional prime number generation called The Genuine Sieve of Eratosthenes. On top of naive algoirthms implemented independently, I show how beautiful, functional haskell code for generating primes translates seamlessly to Clojure.
+This repository includes several algorithms for generating prime numbers, incuding a trivial brute force algorithm, several trial division algorithms, and serveral genuine Sieve Of Eratosthenes algorithms. Consistent with the Clojure philosophy of leveraging the rich academic literature--and as someone with a cognitive science background where the ONLY unit of consuption is the paper--many of the algorithms are based on Haskell implementations discussed in Melissa E. O'Neil's great paper on functional prime number generation called The Genuine Sieve of Eratosthenes. On top of the naive algoirthms implemented independently, I show how beautiful, functional haskell code for generating primes translates seamlessly to Clojure.
 
 
 ## How to Run
@@ -31,5 +31,5 @@ These results are consistent with theoretical predictions. See doc/complexity_an
 
 ## Notes
 - See test/funding_circle for simple tests of each function
-- See test/funding_circle/performance_tests for empirical performance tests (summary below)
+- See test/funding_circle/performance_tests for empirical performance tests (summary above)
 - See inline comments for more explainations.
