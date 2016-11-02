@@ -34,7 +34,7 @@
   ([n]
    (loop [prev [2] i 1]
      (if (== i n) prev
-       (recur (->> (iterate inc (peek prev))
+      (recur (->> (iterate inc (peek prev))
                    (filter (fn [n] (not-any? zero? (map #(rem n %) prev))))
                    first
                    (conj prev))
@@ -118,10 +118,9 @@
                        j (iterate (partial + i) (* i i))
                        :while (< j n)]
                  (aset a j false))
-               (loop [ret (transient []) i 0]
-                 (if (== i n) (persistent! ret)
-                     (recur (if (aget a i) (conj! ret i) ret)
-                            (inc i))))))
+               (into []
+                     (filter (partial aget a))
+                     (range n))))
            (segment [n]
              (let [segment-size (.intValue (Math/ceil (Math/sqrt n)))
                    primes (sieve segment-size)
