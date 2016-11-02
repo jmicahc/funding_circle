@@ -14,7 +14,9 @@
 
 (def brute-force
   "Brute force prime generation algorithm works by testing if
-   the nth number has no lesser numbers that divide it."
+   the nth number has no lesser numbers that divide it.
+  
+   Time complexity is O(n^2)."
   (cons 2 (filter (fn [n]
                     (loop [i 2]
                       (if (= i n) n
@@ -26,7 +28,9 @@
   "This is the best algorithm I came up with on my own. Turns 
    out it what is called a trial division algorithm. It works by testing 
    whether the nth number can be written as a composite of previous 
-   primes. Eagerly builds up a vector of n primes."
+   primes. Eagerly builds up a vector of n primes.
+
+  Time complexity is O( n^2 / log(n^2) )."
   ([n]
    (loop [prev [2] i 1]
      (if (== i n) prev
@@ -41,7 +45,9 @@
    that is often mistaken for the Sieve of Eratosthenes algorithm. It is 
    expressed in the paper as the haskell equivalent of the following elegant
    but slow algorithm. Unfortunately the stack blows for large n with this
-   algorithm."
+   algorithm.
+
+   Time complexity is O( n^2 / log(n)^2 )."
   (letfn [(step [[prime & xs]]
             (lazy-seq (cons prime (filter #(pos? (rem % prime)) (step xs)))))]
     (step (iterate inc 2))))
@@ -50,7 +56,7 @@
 (def lazy-trial-division-xf
   "An attempt to implement the lazy trial division algorithm above using 
    transducers in the hopes of eliminating the overhead of realizing 
-   intermediate filter results. Turns out this is actually much slower."
+   intermediate filter results. Turns out this is actually incredibly slower."
   (letfn [(step [n f]
             (let [[p n] (sequence f (iterate inc n))]
               (lazy-seq (cons p (step n (comp f (filter #(pos? (mod % p)))))))))]
@@ -63,7 +69,9 @@
    same as above, except it only takes primes from previous primes that are
    less than the square root of the nth prime. Note that lazy sequences seem to
    cache when bound to a root var, so we don't recompute primes on recursive calls.
-   This is in fact the optimal trial division algorithm (asymptotically speaking)."
+   This is in fact the optimal trial division algorithm (asymptotically speaking).
+
+   Time complexity is O( n*sqrt(n) / log(n)^2 )."
   (lazy-seq
     (letfn [(candidate-factors [x]
               (take-while (fn [p] (<= (* p p) x)) optimized-trial-division))
@@ -96,7 +104,9 @@
    Further, this algorithm uses seqs, which are amazing slow compared to 
    loop-based iterations. This is included merely for completeness as an example of
    the Segmented Sieve algorithm. If you wanted to really go down this road, you would
-   be best off interoping with a third-party java library."
+   be best off interoping with a third-party java library.
+
+   Time complexity is O( nloglogn )."
   ([n]
    (letfn [(sieve [n]
              (let [a (boolean-array n true)]
@@ -142,7 +152,12 @@
    The algorithm ports quite beautifully to Clojure, except for the unfortunate
    fact that lazy-sequences are evaluated when associated into the 
    priority map provided in Clojure.data. We hack this temporarily by wrapping
-   the sequence in a cell to prevent eager evaluation."
+   the sequence in a cell to prevent eager evaluation.
+
+   Time complexity is O( nloglogn ). Note that for a typical sieve, n
+   referes to the number of primes less than x, but finding the nth prime is
+   asymptotically the same, since log(n*log(n)) = log(n) + log(log(n)); the extra
+   logarithms drops out."
   ([[x & xs]]
    (letfn [(insert-prime [prime xs table]
              (assoc table (Cell. (map (partial * prime) xs)) (* prime prime)))
@@ -159,7 +174,7 @@
      (lazy-seq (cons x (sieve xs (insert-prime x xs (priority-map))))))))
 
 
-;; A side-bennifitt of this approach is that we can now quite easily improve
+;; A side-bennifit of this approach is that we can now quite easily improve
 ;; performance by adding wheel factoriaion without needing to change
 ;; the sieve algorithm at all. Wheel factorization is a natural
 ;; extension of the intuitive idea that we can avoid multiples of 2 by

@@ -24,7 +24,8 @@
 ;;   100     |   0.045831  | 2.018853 |   0.00441    |     2.700833     |    0.003956     | 
 ;;   1000    |   1065.666  | 292.2991 |   33.0679    |     55.74185     |    25.25332     |
 ;;   10000   |   121592.5  | 22592.33 |   719.024    |     1101.805     |    552.2367     |
-(neth (take n algs/wheel2357-primes))
+
+#_(test-perf 10)
 (comment 
   n = 10
   "Elapsed time: 0.052281 msecs"
@@ -38,7 +39,7 @@
   "Elapsed time: 0.009309 msecs"
   "Elapsed time: 0.006669 msecs")
 
-(test-perf 100)
+#_(test-perf 100)
 (comment
   n = 100
   "Elapsed time: 11.642368 msecs"
@@ -52,6 +53,7 @@
   "Elapsed time: 17.319495 msecs"
   "Elapsed time: 3.219721 msecs")
 
+#_(test-perf 1000)
 (comment
   n = 1000
   "Elapsed time: 1065.666048 msecs"
@@ -67,7 +69,7 @@
 
 
 
-(test-perf 10000)
+#_(test-perf 10000)
 (comment
   n = 10000
   "Elapsed time: 121592.487994 msecs"

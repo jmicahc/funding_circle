@@ -32,3 +32,4 @@ These results are consistent with theoretical predictions. See doc/complexity_an
 ## Notes
 - See test/funding_circle for simple tests of each function
 - See test/funding_circle/performance_tests for empirical performance tests (summary below)
+- See inline comments for more explainations.
