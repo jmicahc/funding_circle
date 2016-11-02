@@ -7,7 +7,7 @@ This repository includes several algorithms for generating prime numbers, incudi
 - Clone this repository
 - Make sure leiningen version `2.7.1` or greater is installed (any version > 2.0 will probably work too).
 - At the root, run `lein compile`, then `lein uberjar`
-- Then, `target/funding_circle-0.1.0-SNAPSHOT-standalone.jar`. You should see a table printed of the product of the first 10 primes.
+- Then, run `java -jar target/funding_circle-0.1.0-SNAPSHOT-standalone.jar`. You should see a table printed of the product of the first 10 primes.
 
 
 ## Dependencies
